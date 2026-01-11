@@ -1,0 +1,124 @@
+<link rel="stylesheet" href="/main.css">
+
+<div id="buttoncont">
+    <button id="a" onclick="window.location.href='/'">Home</button>
+</div>
+<div id="main">
+    <h1 class="t d" style="color:blue;"">Java</h1>
+    <h1 class="s d" id="js">Click to copy</h1>
+    <div class="c d" id="j">javaip</div>
+
+    <h1 class="t d" style="color:red;">Eagler</h1>
+    <h1 class="s d" id="es">Click to copy</h1>
+    <div class="c d" id="e">eaglerip</div>
+</div>
+<style>
+    #main {
+        width: 70%;
+        position: relative;
+        height: 100%;
+        left: 15%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #buttoncont {
+        justify-content: start;
+    }
+
+    .s {
+        font-size: 2.4vh;
+        margin: 1px;
+        align-self: flex-start;
+    }
+
+    .t {
+        font-size: 6vh;
+        margin: 1px;
+    }
+
+    #j {
+        border-color: blue;
+        background: rgba(0,0,255,0.1);
+    }
+
+    #e {
+        border-color: red;
+        background: rgba(255,0,0,0.1);
+    }
+
+    #j:hover {
+        background: rgba(0,0,255,0.2);
+    }
+
+    #e:hover {
+        background: rgba(255,0,0,0.2);
+    }
+
+    #js {
+        color: rgba(0, 0, 255, 0.8);
+    }
+
+    #es {
+        color: rgba(255, 0, 0, 0.8);
+    }
+
+    .c {
+        width: 100%;
+        cursor: pointer;
+        border-radius: 20px;
+        color: rgb(192, 192, 192);
+        margin-bottom: 5vh;
+        padding-left:1vw;
+        font-size: 4vh;
+        padding:2vh;
+        border: 1px solid rgb(105, 105, 105);
+    }
+
+    #a:hover {
+        box-shadow: 0 0 10px blue;
+    }
+
+    #a {
+        background: blue;
+    }
+</style>
+<script>
+    let jd = false;
+    let ed = false;
+    const wait = 800;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("j").addEventListener("click", async ()=>{
+            if (!jd) {
+                jd = true;
+                await navigator.clipboard.writeText(document.getElementById("j").innerText);
+                document.getElementById("js").style.color = "rgba(0, 0, 255, 1)";
+                document.getElementById("js").innerText = "Copied!";
+
+                setTimeout(()=>{
+                    document.getElementById("js").style.color = "rgba(0, 0, 255, 0.8)";
+                    document.getElementById("js").innerText = "Click to copy";
+                    jd = false;
+                }, wait);
+            }
+        });
+
+        document.getElementById("e").addEventListener("click", async ()=>{
+            if (!ed) {
+                ed = true;
+                await navigator.clipboard.writeText(document.getElementById("e").innerText);
+                document.getElementById("es").style.color = "rgba(255, 0, 0, 1)";
+                document.getElementById("es").innerText = "Copied!";
+
+                setTimeout(()=>{
+                    document.getElementById("es").style.color = "rgba(255, 0, 0, 0.8)";
+                    document.getElementById("es").innerText = "Click to copy";
+                    ed = false;
+                }, wait);
+            }
+        });
+    });
+</script>
