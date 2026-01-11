@@ -1,0 +1,51 @@
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes flyfromleft {
+    from {
+        opacity: 1;
+        transform: translateX(-150%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+@keyframes flyfromright {
+    from {
+        opacity: 1;
+        transform: translateX(150%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+@keyframes jumpout {
+    0% {
+        transform: scale(0%);
+    }
+    90% {
+        transform: scale(120%);
+    }
+    100% {
+        transform: scale(100%);
+    }
+}

@@ -1,78 +1,103 @@
-<link rel="stylesheet" href="/main.css">
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="animations.css">
 
-<div id="buttoncont">
-    <button id="a" onclick="window.location.href='/about/'">About</button>
-    <button id="p" onclick="window.location.href='/play/'">Play</button>
-</div>
 
 <div id="cont">
-    <div id="main">Nemo<b id="n">XN</b></div>
+    <div class = "aligner">
+        <div id="main">Nemo<b id="n">XN</b></div>
+        <div class="subtext d" id="starter">Scroll down to continue</div>
+    </div>
+    
+    <div id = "ips">
+        <h1 class="t" id="java" style="color:blue;">Java</h1>
+        <div id="pcj">
+            <h1 class="s" id="js">Click to copy</h1>
+            <div class="c" id="j">java://mc.nemoxn.top:25568</div>
+        </div>
+
+        <h1 class="t" id="eagler" style="color:red;">Eagler</h1>
+        <div id="pce">
+            <h1 class="s" id="es">Click to copy</h1>
+            <div class="c" id="e">eaglerip</div>
+        </div>
+    </div>
+
+    <div id="about">
+        <h1 id="aboutt">About Us</h1>
+        <p id="d">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,</p>
+    </div>
+
+    <div id="community">
+        <button id="join" data-url="https://discord.gg/zkcxyhah6y" onclick="window.location.href=this.dataset.url">Join Our Discord</button>
+    </div>
+
+    <div id="credits">
+        <h1 id="creditst">Credits</h1>
+        <p id="ct">
+            ⋅ Website designed and developed by Potato
+            <br>
+            ⋅ Server hosted by Nemo and DemXn
+        </p>
+    </div>
 </div>
-<div id="cont2">
-    <div id="main2">Nemo<b id="n2">XN</b></div>
-</div>
-<style>
-    #main {
-        color: blue;
-        text-shadow: 0 0 10px;
-    }
-
-    button:hover {
-        font-size: 4vh;
-    }
-
-    #a:hover {
-        box-shadow: 0 0 10px blue;
-    }
-
-    #a {
-        background: blue;
-    }
-
-    #p:hover {
-        box-shadow: 0 0 10px red;
-    }
-
-    #p {
-        background: red;
-    }
-
-    #n {
-        color: transparent;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    #n2 {
-        text-shadow: 0 0 10px red;
-    }
-
-    #main2 {
-        text-shadow: 0 0 0px;
-    }
-
-    #cont, #cont2 {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        font-size: 15vh;
-        font-family: "Alfa Slab One", serif;
-        font-weight: 100;
-        font-style: normal;
-        letter-spacing: 3px;
-    }
-    #cont2 {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        z-index: -9999;
-    }
-</style>
+<script src="animations.js"></script>
 <script>
+    let started = false;
+    let eipsdone = false;
+    let ipsdone = false;
+    let aboutdone = false;
+    let communitydone = false;
+    let creditsdone = false;
+    
+    document.addEventListener("scroll",async ()=>{
+        console.log(window.scrollY);
+        if (!started && window.scrollY>5) {
+            started = true;
+            await fadeOut(document.getElementById("starter"), "0.5s");
+        } else {
+            if (!ipsdone && window.scrollY>70) {
+                fadeIn(document.getElementById("java"), "1s");
+                await flyFromLeft(document.getElementById("pcj"), "1s");
+                fadeIn(document.getElementById("eagler"), "1s");
+                await flyFromRight(document.getElementById("pce"), "1s");
+                ipsdone = true;
+            }
+
+            if (!aboutdone && window.scrollY>400) {
+                await fadeIn(document.getElementById("aboutt"),"1s");
+                await fadeIn(document.getElementById("d"),"1s");
+                aboutdone = true;
+            }
+
+            if (!communitydone && window.scrollY>500) {
+                await jumpOut(document.getElementById("join"),"1s");
+                communitydone = true;
+            }
+
+            if (!creditsdone && window.scrollY>700) {
+                await fadeIn(document.getElementById("creditst"),"1s");
+                await fadeIn(document.getElementById("ct"),"1s");
+                creditsdone = true;
+
+            }
+        } 
+    });
+
+    history.scrollRestoration = "manual";
+
+    window.addEventListener("load", () => {
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "auto"
+            });
+
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }, 10); 
+    });
+
     const d = 7;
     const speed = 13;
     const wait = 1300;

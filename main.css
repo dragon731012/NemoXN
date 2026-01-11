@@ -11,6 +11,35 @@
     justify-content: end;
 }
 
+.aligner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 70vh;
+    font-size: 15vh;
+    font-family: "Alfa Slab One", serif;
+    font-weight: 100;
+    font-style: normal;
+    letter-spacing: 3px;
+}
+
+#cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.h {
+    opacity: 0;
+}
+
+.n {
+    display: none;
+}
+
 button {
     border-radius: 15px;
     font-size: 3vh;
@@ -33,7 +62,71 @@ button:hover {
     font-size: 4vh;
 }
 
-.d {
+#about{
+    display: flex;
+    height: 80%;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Alfa Slab One", serif;
+    font-weight: 100;
+    font-style: normal;
+    letter-spacing: 3px;
+}
+
+#credits{
+    display: flex;
+    height: 80%;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Alfa Slab One", serif;
+    font-weight: 100;
+    font-style: normal;
+    letter-spacing: 3px;
+}
+
+#aboutt {
+    color: blue;
+    padding: 0px;
+    margin-bottom: 0px;
+    margin-top: 3vh;
+    opacity: 0;
+}
+
+#creditst {
+    color: red;
+    padding: 0px;
+    margin-bottom: 0px;
+    margin-top: 7vh;
+    opacity: 0;
+}
+
+#d {
+    background: rgba(0,0,255,0.3);
+    border-radius: 15px;
+    border: 1px solid blue;
+    padding:0.5vw;
+    opacity: 0;
+    color: blue;
+    font-size: 3vh;
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#ct {
+    background: rgba(255,0,0,0.3);
+    border-radius: 15px;
+    border: 1px solid red;
+    padding:0.5vw;
+    width: 100%;
+    opacity: 0;
+    color: red;
+    font-size: 3vh;
     font-family: "Orbitron", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -42,5 +135,110 @@ button:hover {
 
 body {
     background: #1c1b1b;
+    margin: 0; 
+    overflow-x: hidden;
     background: linear-gradient(135deg,rgb(0, 0, 0) 0%, rgb(44, 44, 44) 100%);
+}
+
+html {
+    margin: 0;
+}
+
+#ips {
+    width: 70%;
+    height: 100%;
+    left: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.s {
+    font-size: 2.4vh;
+    margin: 1px;
+    align-self: flex-start;
+}
+
+#pcj {
+    opacity: 0;
+    width: 100%;
+}
+
+#pce {
+    opacity: 0;
+    width: 100%;
+}
+
+.t {
+    font-size: 6vh;
+    margin: 1px;
+    opacity: 0;
+}
+
+#main {
+    color: blue;
+    padding-top: 15vh;
+    text-shadow: 0 0 10px;
+}
+
+#n {
+    color: transparent;
+    text-shadow: 0 0 10px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtext {
+    font-size: 2vw;
+    background: linear-gradient(to right, rgba(0,0,255,1) 0%, rgba(255,0,0,1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#join {
+    background: blue;
+    transform: scale(0%);
+}
+
+#j {
+    border-color: blue;
+    background: rgba(0,0,255,0.1);
+}
+
+#e {
+    border-color: red;
+    background: rgba(255,0,0,0.1);
+}
+
+#j:hover {
+    background: rgba(0,0,255,0.2);
+}
+
+#e:hover {
+    background: rgba(255,0,0,0.2);
+}
+
+#js {
+    color: rgba(0, 0, 255, 0.8);
+    opacity: 1;
+}
+
+#es {
+    color: rgba(255, 0, 0, 0.8);
+}
+
+.c {
+    width: 100%;
+    opacity: 1;
+    cursor: pointer;
+    border-radius: 20px;
+    color: rgb(192, 192, 192);
+    margin-bottom: 5vh;
+    padding-left:1vw;
+    font-size: 4vh;
+    padding:2vh;
+    border: 1px solid rgb(105, 105, 105);
 }
