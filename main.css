@@ -89,7 +89,7 @@ button:hover {
 }
 
 #aboutt {
-    color: blue;
+    color: red;
     padding: 0px;
     margin-bottom: 0px;
     margin-top: 3vh;
@@ -97,7 +97,7 @@ button:hover {
 }
 
 #creditst {
-    color: red;
+    color: blue;
     padding: 0px;
     margin-bottom: 0px;
     margin-top: 7vh;
@@ -105,12 +105,12 @@ button:hover {
 }
 
 #d {
-    background: rgba(0,0,255,0.3);
+    background: rgba(255,0,0,0.3);
     border-radius: 15px;
-    border: 1px solid blue;
+    border: 1px solid red;
     padding:0.5vw;
     opacity: 0;
-    color: blue;
+    color: red;
     font-size: 3vh;
     font-family: "Orbitron", sans-serif;
     font-optical-sizing: auto;
@@ -119,13 +119,13 @@ button:hover {
 }
 
 #ct {
-    background: rgba(255,0,0,0.3);
+    background: rgba(0,0,255,0.3);
     border-radius: 15px;
-    border: 1px solid red;
+    border: 1px solid blue;
     padding:0.5vw;
     width: 100%;
     opacity: 0;
-    color: red;
+    color: blue;
     font-size: 3vh;
     font-family: "Orbitron", sans-serif;
     font-optical-sizing: auto;
@@ -204,7 +204,7 @@ html {
 }
 
 #join {
-    background: blue;
+    background: red;
     transform: scale(0%);
 }
 
