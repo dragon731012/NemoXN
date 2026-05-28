@@ -12,13 +12,19 @@
         <h1 class="t" id="java" style="color:blue;">Java</h1>
         <div id="pcj">
             <h1 class="s" id="js">Click to copy</h1>
-            <div class="c" id="j">java.nemoxn.top</div>
+            <div class="c" id="j">mc.nemoxn.top</div>
         </div>
 
-        <h1 class="t" id="eagler" style="color:red;display:none !important;">Eagler</h1>
-        <div id="pce" style="display:none !important;">
+        <h1 class="t" id="eagler" style="color:red;">Eagler</h1>
+        <div id="pce">
             <h1 class="s" id="es">Click to copy</h1>
             <div class="c" id="e">eagler.nemoxn.top</div>
+        </div>
+        
+        <h1 class="t" id="bedrock" style="color:blue;">Bedrock</h1>
+        <div id="pcb">
+            <h1 class="s" id="bs">Click to copy</h1>
+            <div class="c" id="b">mc.nemoxn.top:25573</div>
         </div>
     </div>
 
@@ -58,8 +64,10 @@
             if (!ipsdone && window.scrollY>70) {
                 fadeIn(document.getElementById("java"), "1s");
                 await flyFromLeft(document.getElementById("pcj"), "1s");
-                /*fadeIn(document.getElementById("eagler"), "1s");
-                await flyFromRight(document.getElementById("pce"), "1s");*/
+                fadeIn(document.getElementById("eagler"), "1s");
+                await flyFromRight(document.getElementById("pce"), "1s");
+                fadeIn(document.getElementById("bedrock"), "1s");
+                await flyFromRight(document.getElementById("pcb"), "1s");
                 ipsdone = true;
             }
 
@@ -119,6 +127,7 @@
 
     let jd = false;
     let ed = false;
+    let bd = false;
     const wait2 = 800;
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -148,6 +157,20 @@
                     document.getElementById("es").style.color = "rgba(255, 0, 0, 0.8)";
                     document.getElementById("es").innerText = "Click to copy";
                     ed = false;
+                }, wait2);
+            }
+        });
+        document.getElementById("b").addEventListener("click", async ()=>{
+            if (!bd) {
+                bd = true;
+                await navigator.clipboard.writeText(document.getElementById("b").innerText);
+                document.getElementById("bs").style.color = "rgba(0, 0, 255, 1)";
+                document.getElementById("bs").innerText = "Copied!";
+
+                setTimeout(()=>{
+                    document.getElementById("bs").style.color = "rgba(0, 0, 255, 0.8)";
+                    document.getElementById("bs").innerText = "Click to copy";
+                    bd = false;
                 }, wait2);
             }
         });

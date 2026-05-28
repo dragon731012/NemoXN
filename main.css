@@ -170,6 +170,11 @@ html {
     width: 100%;
 }
 
+#pcb {
+    opacity: 0;
+    width: 100%;
+}
+
 .t {
     font-size: 6vh;
     margin: 1px;
@@ -213,12 +218,21 @@ html {
     background: rgba(255,0,0,0.1);
 }
 
+#b {
+    border-color: blue;
+    background: rgba(0,0,255,0.1);
+}
+
 #j:hover {
     background: rgba(0,0,255,0.2);
 }
 
 #e:hover {
     background: rgba(255,0,0,0.2);
+}
+
+#b:hover {
+    background: rgba(0,0,255,0.2);
 }
 
 #js {
@@ -228,6 +242,11 @@ html {
 
 #es {
     color: rgba(255, 0, 0, 0.8);
+}
+
+#bs {
+    color: rgba(0, 0, 255, 0.8);
+    opacity: 1;
 }
 
 .c {
