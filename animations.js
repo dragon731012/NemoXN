@@ -153,7 +153,6 @@ function animationloop(){
             if (c<maxd){
                 let t = 1-(c/maxd);
                 let g = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
-                console.log(getcolor(p1.c, t));
                 g.addColorStop(0, getcolor(p1.c, t));
                 g.addColorStop(1, getcolor(p2.c, t));
 
