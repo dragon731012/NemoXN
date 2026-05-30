@@ -92,7 +92,6 @@ let rad=1;
 let a=70;
 let maxd=100;
 
-canvas.style="position:fixed;top:0px;left:0px;z-index:-3;";
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 document.body.appendChild(canvas);

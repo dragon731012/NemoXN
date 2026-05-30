@@ -59,6 +59,7 @@
     document.addEventListener("scroll",async ()=>{
         if (!started && window.scrollY>5) {
             started = true;
+            document.querySelectorAll("canvas")[0].style="filter: blur(2px);";
             await fadeOut(document.getElementById("starter"), "0.5s");
         } else {
             if (!ipsdone && window.scrollY>screen.height/15.428571428571429) {
