@@ -89,7 +89,9 @@ function randomnum(min, max) {
 let canvas=document.createElement("canvas");
 let ctx=canvas.getContext('2d');
 let rad=1;
-let a=50;
+let a=70;
+let maxd=100;
+
 canvas.style="position:fixed;top:0px;left:0px;z-index:-3;";
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -107,6 +109,14 @@ for (let i=0;i<a;i++){
     });
 }
 
+function getcolor(c,t=1){
+    if (c=="r"){
+        return "rgba(255, 69, 56,"+t+")"
+    } else {
+        return "rgba(0, 123, 255,"+t+")"
+    }
+}
+
 function animationloop(){
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
@@ -121,15 +131,41 @@ function animationloop(){
         if (p.y>window.innerHeight) p.y=0;
     
         if (p.c=="r"){
-            ctx.strokeStyle = "#ff4538";
+            ctx.strokeStyle = getcolor("r");
             ctx.fillStyle = "#ff8178";
         } else {
-            ctx.strokeStyle = '#007bff';
+            ctx.strokeStyle = getcolor("b");
             ctx.fillStyle = '#abcfff';
         }
 
         ctx.stroke();
         ctx.fill();
+    }
+
+    for (let i=0;i<particles.length;i++){
+        for (let j=0;j<particles.length;j++){
+            let p1=particles[i];
+            let p2=particles[j];
+
+            //fucking pythagorean theorem
+            let a=(p1.y-p2.y)**2;
+            let b=(p1.x-p2.x)**2;
+            let c=Math.sqrt(a+b);
+            if (c<maxd){
+                let t = 1-(c/maxd);
+                let g = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
+                console.log(getcolor(p1.c, t));
+                g.addColorStop(0, getcolor(p1.c, t));
+                g.addColorStop(1, getcolor(p2.c, t));
+
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.strokeStyle = g;
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+            }
+        }
     }
     
     requestAnimationFrame(animationloop);
