@@ -93,7 +93,7 @@
 
     history.scrollRestoration = "manual";
 
-    // auto scroll to top on page load
+    // auto scroll to top on page load and start particles
     window.addEventListener("load", () => {
         setTimeout(() => {
             window.scrollTo({
@@ -105,6 +105,8 @@
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
         }, 10); 
+
+        animationloop();
     });
 
     const d = 7;
