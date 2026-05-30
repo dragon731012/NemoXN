@@ -11,6 +11,10 @@
     justify-content: end;
 }
 
+html {
+    overflow-x:hidden;
+}
+
 .aligner {
     display: flex;
     flex-direction: column;
@@ -18,7 +22,7 @@
     justify-content: center;
     width: 100vw;
     height: 70vh;
-    font-size: 15vh;
+    font-size: min(15vh,17vw);
     font-family: "Alfa Slab One", serif;
     font-weight: 100;
     font-style: normal;
@@ -136,12 +140,15 @@ button:hover {
 body {
     background: #1c1b1b;
     margin: 0; 
+    padding: 0;
     overflow-x: hidden;
     background: linear-gradient(135deg,rgb(0, 0, 0) 0%, rgb(44, 44, 44) 100%);
 }
 
 html {
     margin: 0;
+    padding: 0;
+    background: black;
 }
 
 #ips {
@@ -211,16 +218,19 @@ html {
 #j {
     border-color: blue;
     background: rgba(0,0,255,0.1);
+    color: blue;
 }
 
 #e {
     border-color: red;
     background: rgba(255,0,0,0.1);
+    color: red;
 }
 
 #b {
     border-color: blue;
     background: rgba(0,0,255,0.1);
+    color: blue;
 }
 
 #j:hover {
