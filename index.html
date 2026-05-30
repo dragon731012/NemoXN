@@ -77,7 +77,7 @@
             started = true;
             await fadeOut(document.getElementById("starter"), "0.5s");
         } else {
-            if (!ipsdone && window.scrollY>screen.height/15.428571428571429/*70*/) {
+            if (!ipsdone && window.scrollY>screen.height/15.428571428571429) {
                 fadeIn(document.getElementById("java"), "1s");
                 await flyFromLeft(document.getElementById("pcj"), "1s");
                 fadeIn(document.getElementById("eagler"), "1s");
@@ -87,19 +87,19 @@
                 ipsdone = true;
             }
 
-            if (!aboutdone && window.scrollY>screen.height/2.7/*400*/) {
+            if (!aboutdone && window.scrollY>screen.height/2.7) {
                 await fadeIn(document.getElementById("aboutt"),"1s");
                 await fadeIn(document.getElementById("d"),"1s");
                 aboutdone = true;
             }
 
-            if (!communitydone && window.scrollY>screen.height/2.16/*500*/) {
+            if (!communitydone && window.scrollY>screen.height/2.16) {
                 await jumpOut(document.getElementById("join"),"1s");
                 startBounce(document.getElementById("join"));
                 communitydone = true;
             }
 
-            if (!creditsdone && window.scrollY>screen.height/1.542857142857143/*700*/) {
+            if (!creditsdone && window.scrollY>screen.height/1.542857142857143) {
                 await fadeIn(document.getElementById("creditst"),"1s");
                 await fadeIn(document.getElementById("ct"),"1s");
                 creditsdone = true;
