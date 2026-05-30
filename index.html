@@ -54,9 +54,25 @@
     let aboutdone = false;
     let communitydone = false;
     let creditsdone = false;
+
+    function startBounce(e){
+        let scale=120;
+        function bounce(delay){
+            setTimeout(()=>{
+                if (scale==120){
+                    scale=100;
+                    bounce(1000);
+                } else {
+                    scale=120;
+                    bounce(300);
+                }
+                e.style="transform:scale("+scale+"%);";
+            },delay);
+        }
+        bounce(800);
+    }
     
     document.addEventListener("scroll",async ()=>{
-        console.log(window.scrollY);
         if (!started && window.scrollY>5) {
             started = true;
             await fadeOut(document.getElementById("starter"), "0.5s");
@@ -79,6 +95,7 @@
 
             if (!communitydone && window.scrollY>screen.height/2.16/*500*/) {
                 await jumpOut(document.getElementById("join"),"1s");
+                startBounce(document.getElementById("join"));
                 communitydone = true;
             }
 
@@ -86,7 +103,6 @@
                 await fadeIn(document.getElementById("creditst"),"1s");
                 await fadeIn(document.getElementById("ct"),"1s");
                 creditsdone = true;
-
             }
         } 
     });
