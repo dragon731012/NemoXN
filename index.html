@@ -55,23 +55,7 @@
     let communitydone = false;
     let creditsdone = false;
 
-    function startBounce(e){
-        let scale=120;
-        function bounce(delay){
-            setTimeout(()=>{
-                if (scale==120){
-                    scale=100;
-                    bounce(1000);
-                } else {
-                    scale=120;
-                    bounce(300);
-                }
-                e.style="transform:scale("+scale+"%);";
-            },delay);
-        }
-        bounce(800);
-    }
-    
+    // detect user scroll position to show new elements
     document.addEventListener("scroll",async ()=>{
         if (!started && window.scrollY>5) {
             started = true;
@@ -109,6 +93,7 @@
 
     history.scrollRestoration = "manual";
 
+    // auto scroll to top on page load
     window.addEventListener("load", () => {
         setTimeout(() => {
             window.scrollTo({
@@ -129,6 +114,7 @@
 
     var val = -5;
 
+    // reflection effect
     setInterval(()=>{
         e.style = "background: linear-gradient(to top right, rgba(255,0,0,1) 0%, rgba(255,0,0,1) "+(val-d)+"%, rgba(255,255,255,1) "+val+"%, rgba(255,0,0,1) "+(val+d)+"%, rgba(255,0,0,1) 100%);-webkit-background-clip: text;background-clip: text;-webkit-text-fill-color: transparent;"
 
@@ -146,6 +132,7 @@
     let bd = false;
     const wait2 = 800;
 
+    //copy and paste initialization on dom load
     document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("j").addEventListener("click", async ()=>{
             if (!jd) {
