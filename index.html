@@ -52,14 +52,13 @@
     #play {
         text-shadow: none !important;
         color: blue;
-        background: rgba(0,0,255,0.2);
-        border-radius: 50%;
         font-size: min(3vh,5vw);
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 3vw;
-        margin-right: 0.5vw;
+        margin-right: 1vw;
+        border-radius: 15px;
+        background-color: blue;
         height: 3vw;
     }
 
@@ -71,17 +70,44 @@
         text-shadow: 0 0 15px;
         transform: scale(110%);
     }
+
+    #c {
+        font-size: 3vh;
+        padding-left: 2vh;
+        cursor: pointer;
+        padding-right: 2vh;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        margin: 0.2vw;
+        color: white; 
+        border: 0px;
+        font-family: "Orbitron", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        transition: 0.5s all;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #c img {
+        height: 2.5vh;
+    }
 </style>
 
 <nav>
     <a href="#home" class="n" style="margin-right: auto;"><span style="color:blue">X</span><span style="color:red">N</span></a>
-    <a href="#join" class="n" id="play"><div style="transform: scaleX(80%) translateX(0.15vw) translateY(-0.2vw);">▶</div></a>
+    <a href="#join" class="n" id="play"><span id="c">Play<img src="play.png"/></span></a>
 </nav>
 
 <iframe id="view"></iframe>
 <script src="particles.js"></script>
 
 <script>
+    let oldhash="";
+
     async function loadPage(url,d=800) {
         const v = document.getElementById('view');
         v.style.opacity = 0;
@@ -93,22 +119,26 @@
             v.onload=function(){
                 v.style.opacity = 1;
             }
+
+            oldhash=window.location.hash;
         }, d); 
     }
 
     function updateHash(){
         if (window.location.hash){
-            loadPage(window.location.hash.replace("#","")+".html",900);  
+            if (window.location.hash!=oldhash)
+                loadPage(window.location.hash.replace("#","")+".html",900);  
         } else {
             loadPage("home.html",900);    
         }
         for (let e of document.getElementsByClassName("n")){
-            if (e.href.replace(window.location.origin,"").replace("/","")==window.location.hash){
+            if (e.href.replace(window.location.origin,"").replace("/","").replace("index.html","")==window.location.hash){
                 e.setAttribute("selected","true");
             } else {
                 e.removeAttribute("selected");
             }
         }
+        oldhash=window.location.hash;
     }
 
     window.addEventListener('hashchange', updateHash);
