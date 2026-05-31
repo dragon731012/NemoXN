@@ -63,6 +63,30 @@ function jumpOut(e, d) {
     });
 }
 
+function growFromTop(e, d) {
+    return new Promise(r => {
+        e.style.animation = "growfromtop "+d+" ease forwards";
+
+        e.addEventListener(
+            "animationend",
+            () => r(),
+            { once: true }
+        );
+    });
+}
+
+function growFromLeft(e, d) {
+    return new Promise(r => {
+        e.style.animation = "growfromleft "+d+" ease forwards";
+
+        e.addEventListener(
+            "animationend",
+            () => r(),
+            { once: true }
+        );
+    });
+}
+
 // pulse element
 function startBounce(e){
     let scale=120;

@@ -38,14 +38,43 @@
     }
 }
 
+@keyframes growfromtop {
+    from {
+        transform-origin: top;
+        opacity: 1;
+        transform: scaleY(0%);
+    }
+    to {
+        transform-origin: top;
+        opacity: 1;
+        transform: scaleY(100%);
+    }
+}
+
+@keyframes growfromleft {
+    from {
+        transform-origin: left;
+        opacity: 1;
+        transform: scaleX(0%);
+    }
+    to {
+        transform-origin: left;
+        opacity: 1;
+        transform: scaleX(100%);
+    }
+}
+
 @keyframes jumpout {
     0% {
+        opacity: 1;
         transform: scale(0%);
     }
     90% {
+        opacity: 1;
         transform: scale(120%);
     }
     100% {
+        opacity: 1;
         transform: scale(100%);
     }
 }

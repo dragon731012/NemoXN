@@ -1,1 +1,58 @@
-<h1>work in progress</h1>
+<script src="animations.js"></script>
+<script defer>
+    async function createPoint(text,end=false){
+        var p=document.createElement("div");
+        p.className="point";
+        document.getElementById("cont").appendChild(p);
+        await jumpOut(p,"0.5s");
+
+        var t=document.createElement("div");
+        t.className="text";
+        document.getElementById("cont").appendChild(t);
+        await growFromLeft(t,"0.5s");
+        await say(t,text);
+
+        if (!end){
+            var l=document.createElement("div");
+            l.className="line";
+            document.getElementById("cont").appendChild(l);
+            await growFromTop(l,"0.5s");
+        }
+    }
+    document.addEventListener("DOMContentLoaded",()=>{    
+        //createPoint("test");
+    });
+</script>
+<link rel="stylesheet" href="animations.css">
+<style>
+    .point{
+        width: 5vw;
+        height: 5vw;
+        background: blue;
+        border-radius: 50%;
+        margin-left: 2.5vw;
+        opacity: 0;
+    }
+
+    .line{
+        width: 0.5vw;
+        background: blue;
+        height: 50vw;
+        margin-left: 5vw;
+        opacity: 0;
+    }
+
+    .text{
+        width: 80vw;
+        height: 2.5vh;
+        border-bottom: 5px solid blue;
+        position: absolute;
+        translate: 7vw -5.2vh;
+        color: blue;
+        text-align: left;
+        font-size: 2vh;
+        padding-left: 3vw;
+        opacity: 0;
+    }
+</style>
+<div id="cont"></div>
