@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="animations.css">
+
+<div id="cont">
+    <div id = "ips">
+        <h1 class="t" id="java" style="color:blue;">Java</h1>
+        <div id="pcj">
+            <h1 class="s" id="js">Click to copy</h1>
+            <div class="c" id="j">mc.nemoxn.top</div>
+        </div>
+
+        <h1 class="t" id="eagler" style="color:red;">Eagler</h1>
+        <div id="pce">
+            <h1 class="s" id="es">Click to copy</h1>
+            <div class="c" id="e">eagler.nemoxn.top</div>
+        </div>
+        
+        <h1 class="t" id="bedrock" style="color:blue;">Bedrock</h1>
+        <div id="pcb">
+            <h1 class="s" id="bs">Click to copy</h1>
+            <div class="c" id="b">mc.nemoxn.top:25573</div>
+        </div>
+    </div>
+
+    <div id="community">
+        <button id="join" data-url="https://discord.gg/zkcxyhah6y" onclick="window.location.href=this.dataset.url">Our community</button>
+    </div>
+</div>
+<style>
+    #starter {
+        opacity: 0;
+    }
+    html,body{
+        overflow: hidden !important;
+        overflow-y: hidden !important;
+        overflow-x: hidden !important;
+    }
+</style>
+<script src="animations.js"></script>
+<script>
+    async function start(){
+        fadeIn(document.getElementById("java"), "1s");
+        await flyFromLeft(document.getElementById("pcj"), "1s");
+        fadeIn(document.getElementById("eagler"), "1s");
+        await flyFromRight(document.getElementById("pce"), "1s");
+        fadeIn(document.getElementById("bedrock"), "1s");
+        await flyFromLeft(document.getElementById("pcb"), "1s");
+        await setTimeout(async() => {
+            await jumpOut(document.getElementById("join"),"1s");
+            startBounce(document.getElementById("join"));
+        }, 800);
+    }
+    start();
+
+    let jd = false;
+    let ed = false;
+    let bd = false;
+    const wait2 = 800;
+
+    //copy and paste initialization on dom load
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("j").addEventListener("click", async ()=>{
+            if (!jd) {
+                jd = true;
+                await navigator.clipboard.writeText(document.getElementById("j").innerText);
+                document.getElementById("js").style.color = "rgba(0, 0, 255, 1)";
+                document.getElementById("js").innerText = "Copied!";
+
+                setTimeout(()=>{
+                    document.getElementById("js").style.color = "rgba(0, 0, 255, 0.8)";
+                    document.getElementById("js").innerText = "Click to copy";
+                    jd = false;
+                }, wait2);
+            }
+        });
+
+        document.getElementById("e").addEventListener("click", async ()=>{
+            if (!ed) {
+                ed = true;
+                await navigator.clipboard.writeText(document.getElementById("e").innerText);
+                document.getElementById("es").style.color = "rgba(255, 0, 0, 1)";
+                document.getElementById("es").innerText = "Copied!";
+
+                setTimeout(()=>{
+                    document.getElementById("es").style.color = "rgba(255, 0, 0, 0.8)";
+                    document.getElementById("es").innerText = "Click to copy";
+                    ed = false;
+                }, wait2);
+            }
+        });
+        document.getElementById("b").addEventListener("click", async ()=>{
+            if (!bd) {
+                bd = true;
+                await navigator.clipboard.writeText(document.getElementById("b").innerText);
+                document.getElementById("bs").style.color = "rgba(0, 0, 255, 1)";
+                document.getElementById("bs").innerText = "Copied!";
+
+                setTimeout(()=>{
+                    document.getElementById("bs").style.color = "rgba(0, 0, 255, 0.8)";
+                    document.getElementById("bs").innerText = "Click to copy";
+                    bd = false;
+                }, wait2);
+            }
+        });
+    });
+</script>
+
+

@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="animations.css">
+
+<div id="cont">
+    <div class = "aligner">
+        <div id="main">Nemo<b id="n">XN</b></div>
+        <div class="subtext d" id="starter">Play the future</div>
+    </div>
+    <div id="community">
+        <button id="join" data-url="https://discord.gg/zkcxyhah6y" onclick="window.top.loadPage('join.html')">Join Now</button>
+    </div>
+
+    <div id="credits">
+        <h1 id="creditst">Credits</h1>
+        <p id="ct">
+            ⋅ Website designed and developed by Potato73
+            <br>
+            ⋅ Server hosted by Nemo and DemXn
+        </p>
+    </div>
+</div>
+<style>
+    #starter {
+        opacity: 0;
+    }
+    html,body{
+        overflow: hidden !important;
+        overflow-y: hidden !important;
+        overflow-x: hidden !important;
+    }
+</style>
+<script src="animations.js"></script>
+<script>
+    async function start(){
+        await setTimeout(async () => {
+            await show(document.getElementById("starter"));
+            await setTimeout(async () => {
+                await jumpOut(document.getElementById("join"),"1s");
+                startBounce(document.getElementById("join"));   
+            }, 300);
+    },900);
+    }
+    start();
+
+    const d = 7;
+    const speed = 13;
+    const wait = 1300;
+    const e = document.getElementById("n");
+
+    var val = -5;
+
+    // reflection effect
+    setInterval(()=>{
+        e.style = "background: linear-gradient(to top right, rgba(255,0,0,1) 0%, rgba(255,0,0,1) "+(val-d)+"%, rgba(255,255,255,1) "+val+"%, rgba(255,0,0,1) "+(val+d)+"%, rgba(255,0,0,1) 100%);-webkit-background-clip: text;background-clip: text;-webkit-text-fill-color: transparent;"
+
+        val+=0.5;
+
+        if (val>100+d) {
+            setTimeout(()=>{
+                val = 0;
+            },wait);
+        }
+    },speed);
+</script>
+
+

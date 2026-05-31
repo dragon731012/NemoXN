@@ -80,91 +80,84 @@ function startBounce(e){
     }
     bounce(800);
 }
+async function show(e){
+    return new Promise((r) => {
+        let val = -5;
+        const d = 7;
+        const step = 1;
+        const speed = 10;
 
-function randomnum(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+        let interval = setInterval(() => {
+            const maskValue = `linear-gradient(to right, 
+                rgba(0,0,0,1) 0%, 
+                rgba(0,0,0,1) ${val - d}%, 
+                rgba(0,0,0,0) ${val}%, 
+                rgba(0,0,0,0) 100%)`;
 
-//particle stuff
-let canvas=document.createElement("canvas");
-let ctx=canvas.getContext('2d');
-let rad=1;
-let a=70;
-let maxd=100;
+            e.style.webkitMaskImage = maskValue;
+            e.style.maskImage = maskValue;
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-document.body.appendChild(canvas);
+            val += step;
 
-let particles=[];
-
-for (let i=0;i<a;i++){
-    particles.push({
-        x: randomnum(0,window.innerWidth),
-        y: randomnum(0,window.innerHeight),
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        c: (i<a/2)?"b":"r"
+            if (val > 100 + d) {
+                clearInterval(interval);
+                e.style.webkitMaskImage = "none";
+                e.style.maskImage = "none";
+            }
+            if (val > 78) {
+                r(true);
+            }
+            e.style.opacity=1;
+        }, speed);
     });
 }
 
-function getcolor(c,t=1){
-    if (c=="r"){
-        return "rgba(255, 69, 56,"+t+")"
-    } else {
-        return "rgba(0, 123, 255,"+t+")"
-    }
-}
+async function say(el, text){
+    el.style.transition = "0s all";
+    el.style.opacity = "1";
 
-function animationloop(){
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    el.innerHTML = "";
 
-    for (let p of particles){
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, rad, 0, 2 * Math.PI);
-        p.x+=p.vx;
-        p.y+=p.vy;
-        if (p.x<0) p.x=window.innerWidth;
-        if (p.x>window.innerWidth) p.x=0;
-        if (p.y<0) p.y=window.innerHeight;
-        if (p.y>window.innerHeight) p.y=0;
-    
-        if (p.c=="r"){
-            ctx.strokeStyle = getcolor("r");
-            ctx.fillStyle = "#ff8178";
+    const words = text.split(" ");
+    const spans = words.map(word => {
+        const s = document.createElement("span");
+        s.textContent = word + " ";
+        el.appendChild(s);
+        return s;
+    });
+
+    const lines = [];
+    let currentLine = [];
+    let lastTop = null;
+
+    spans.forEach(span => {
+        const top = span.getBoundingClientRect().top;
+
+        if (lastTop === null || Math.abs(top - lastTop) < 2) {
+            currentLine.push(span);
         } else {
-            ctx.strokeStyle = getcolor("b");
-            ctx.fillStyle = '#abcfff';
+            lines.push(currentLine);
+            currentLine = [span];
         }
 
-        ctx.stroke();
-        ctx.fill();
+        lastTop = top;
+    });
+
+    if (currentLine.length) lines.push(currentLine);
+
+    el.innerHTML = "";
+    const lineDivs = lines.map(line => {
+        const div = document.createElement("div");
+        div.style.webkitMaskImage = "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)";
+        div.style.maskImage = "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)";
+        
+        line.forEach(span => div.appendChild(span));
+        el.appendChild(div);
+        return div;
+    });
+
+    for (let line of lineDivs) {
+        await show(line);
     }
-
-    for (let i=0;i<particles.length;i++){
-        for (let j=0;j<particles.length;j++){
-            let p1=particles[i];
-            let p2=particles[j];
-
-            //fucking pythagorean theorem
-            let a=(p1.y-p2.y)**2;
-            let b=(p1.x-p2.x)**2;
-            let c=Math.sqrt(a+b);
-            if (c<maxd){
-                let t = 1-(c/maxd);
-                let g = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
-                g.addColorStop(0, getcolor(p1.c, t));
-                g.addColorStop(1, getcolor(p2.c, t));
-
-                ctx.beginPath();
-                ctx.moveTo(p1.x, p1.y);
-                ctx.lineTo(p2.x, p2.y);
-                ctx.strokeStyle = g;
-                ctx.lineWidth = 0.8;
-                ctx.stroke();
-            }
-        }
-    }
-    
-    requestAnimationFrame(animationloop);
+    return true;
 }

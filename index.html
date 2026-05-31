@@ -1,186 +1,118 @@
-<link rel="stylesheet" href="main.css">
-<link rel="stylesheet" href="animations.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Orbitron:wght@400..900&family=Sigmar&display=swap');
 
+    #view {
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        border: 0px;
+        transition: .8s all;
+        position: absolute;
+        opacity: 0;
+    }
+    body,html{
+        overflow: hidden;
+        background: #0a0a0c;
+        overflow: hidden;
+        background: #0a0a0c;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        margin:0px;
+    }
+    nav {
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        width: 100%;
+    }
+    .n {
+        font-style: normal;
+        font-size: min(5vh,7vw);
+        text-decoration: none;
+        margin-left: 0.5vw;
+        margin-top: 0.5vh;
+        transition: 0.5s all;
+    }
+    .n span {
+        font-family: "Alfa Slab One", serif;
+        font-weight: 100;
+        font-style: normal;
+        letter-spacing: 3px;
+    }
 
-<div id="cont">
-    <div class = "aligner">
-        <div id="main">Nemo<b id="n">XN</b></div>
-        <div class="subtext d" id="starter">Scroll down to continue</div>
-    </div>
-    
-    <div id = "ips">
-        <h1 class="t" id="java" style="color:blue;">Java</h1>
-        <div id="pcj">
-            <h1 class="s" id="js">Click to copy</h1>
-            <div class="c" id="j">mc.nemoxn.top</div>
-        </div>
+    .n:hover {
+        transform: scale(105%);
+    }
 
-        <h1 class="t" id="eagler" style="color:red;">Eagler</h1>
-        <div id="pce">
-            <h1 class="s" id="es">Click to copy</h1>
-            <div class="c" id="e">eagler.nemoxn.top</div>
-        </div>
-        
-        <h1 class="t" id="bedrock" style="color:blue;">Bedrock</h1>
-        <div id="pcb">
-            <h1 class="s" id="bs">Click to copy</h1>
-            <div class="c" id="b">mc.nemoxn.top:25573</div>
-        </div>
-    </div>
+    #play {
+        text-shadow: none !important;
+        color: blue;
+        background: rgba(0,0,255,0.2);
+        border-radius: 50%;
+        font-size: min(3vh,5vw);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3vw;
+        margin-right: 0.5vw;
+        height: 3vw;
+    }
 
-    <div id="about">
-        <h1 id="aboutt">About Us</h1>
-        <p id="d">Unlike all the other servers out there, NemoXN isn't just a Minecraft server filled with plugins, shops, and pointless economy gimmicks that ruin the game. We provide a fun semi-modded experience while keeping the game competitive and grindy. NemoXN has multiple seasons that feature new plugins and a different yet fun experience. As a server that values fairness, we do not tolerate anything pay-to-win, however we are always open to player suggestions and donations. Our community is very respectful and non-toxic, something other servers cannot provide. Our staff team mirors these aspects, as they are very supportive and easy-going. Join NemoXN today and have fun playing on a one-of-a-kind, amazing server, unlike anything you've seen before!</p>
-    </div>
+    #play[selected] {
+        box-shadow: 0 0 30px;
+    }
 
-    <div id="community">
-        <button id="join" data-url="https://discord.gg/zkcxyhah6y" onclick="window.location.href=this.dataset.url">Join Our Discord</button>
-    </div>
+    .n[selected] {
+        text-shadow: 0 0 15px;
+        transform: scale(110%);
+    }
+</style>
 
-    <div id="credits">
-        <h1 id="creditst">Credits</h1>
-        <p id="ct">
-            ⋅ Website designed and developed by Potato73
-            <br>
-            ⋅ Server hosted by Nemo and DemXn
-        </p>
-    </div>
-</div>
-<script src="animations.js"></script>
+<nav>
+    <a href="#home" class="n" style="margin-right: auto;"><span style="color:blue">X</span><span style="color:red">N</span></a>
+    <a href="#join" class="n" id="play"><div style="transform: scaleX(80%) translateX(0.15vw) translateY(-0.2vw);">▶</div></a>
+</nav>
+
+<iframe id="view"></iframe>
+<script src="particles.js"></script>
+
 <script>
-    let started = false;
-    let eipsdone = false;
-    let ipsdone = false;
-    let aboutdone = false;
-    let communitydone = false;
-    let creditsdone = false;
+    async function loadPage(url,d=800) {
+        const v = document.getElementById('view');
+        v.style.opacity = 0;
+        
+        setTimeout(async () => {
+            v.src = url;
+            window.location.hash=url.replace(".html","");
+            
+            v.onload=function(){
+                v.style.opacity = 1;
+            }
+        }, d); 
+    }
 
-    // detect user scroll position to show new elements
-    document.addEventListener("scroll",async ()=>{
-        if (!started && window.scrollY>5) {
-            started = true;
-            document.querySelectorAll("canvas")[0].style="filter: blur(2px);";
-            await fadeOut(document.getElementById("starter"), "0.5s");
+    function updateHash(){
+        if (window.location.hash){
+            loadPage(window.location.hash.replace("#","")+".html",900);  
         } else {
-            if (!ipsdone && window.scrollY>screen.height/15.428571428571429) {
-                fadeIn(document.getElementById("java"), "1s");
-                await flyFromLeft(document.getElementById("pcj"), "1s");
-                fadeIn(document.getElementById("eagler"), "1s");
-                await flyFromRight(document.getElementById("pce"), "1s");
-                fadeIn(document.getElementById("bedrock"), "1s");
-                await flyFromLeft(document.getElementById("pcb"), "1s");
-                ipsdone = true;
-            }
-
-            if (!aboutdone && window.scrollY>screen.height/2.7) {
-                await fadeIn(document.getElementById("aboutt"),"1s");
-                await fadeIn(document.getElementById("d"),"1s");
-                aboutdone = true;
-            }
-
-            if (!communitydone && window.scrollY>screen.height/2.16) {
-                await jumpOut(document.getElementById("join"),"1s");
-                startBounce(document.getElementById("join"));
-                communitydone = true;
-            }
-
-            if (!creditsdone && window.scrollY>screen.height/1.542857142857143) {
-                await fadeIn(document.getElementById("creditst"),"1s");
-                await fadeIn(document.getElementById("ct"),"1s");
-                creditsdone = true;
-            }
-        } 
-    });
-
-    history.scrollRestoration = "manual";
-
-    // auto scroll to top on page load and start particles
-    window.addEventListener("load", () => {
-        setTimeout(() => {
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: "auto"
-            });
-
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }, 10); 
-
-        animationloop();
-    });
-
-    const d = 7;
-    const speed = 13;
-    const wait = 1300;
-    const e = document.getElementById("n");
-
-    var val = -5;
-
-    // reflection effect
-    setInterval(()=>{
-        e.style = "background: linear-gradient(to top right, rgba(255,0,0,1) 0%, rgba(255,0,0,1) "+(val-d)+"%, rgba(255,255,255,1) "+val+"%, rgba(255,0,0,1) "+(val+d)+"%, rgba(255,0,0,1) 100%);-webkit-background-clip: text;background-clip: text;-webkit-text-fill-color: transparent;"
-
-        val+=0.5;
-
-        if (val>100+d) {
-            setTimeout(()=>{
-                val = 0;
-            },wait);
+            loadPage("home.html",900);    
         }
-    },speed);
-
-    let jd = false;
-    let ed = false;
-    let bd = false;
-    const wait2 = 800;
-
-    //copy and paste initialization on dom load
-    document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("j").addEventListener("click", async ()=>{
-            if (!jd) {
-                jd = true;
-                await navigator.clipboard.writeText(document.getElementById("j").innerText);
-                document.getElementById("js").style.color = "rgba(0, 0, 255, 1)";
-                document.getElementById("js").innerText = "Copied!";
-
-                setTimeout(()=>{
-                    document.getElementById("js").style.color = "rgba(0, 0, 255, 0.8)";
-                    document.getElementById("js").innerText = "Click to copy";
-                    jd = false;
-                }, wait2);
+        for (let e of document.getElementsByClassName("n")){
+            if (e.href.replace(window.location.origin,"").replace("/","")==window.location.hash){
+                e.setAttribute("selected","true");
+            } else {
+                e.removeAttribute("selected");
             }
-        });
+        }
+    }
 
-        document.getElementById("e").addEventListener("click", async ()=>{
-            if (!ed) {
-                ed = true;
-                await navigator.clipboard.writeText(document.getElementById("e").innerText);
-                document.getElementById("es").style.color = "rgba(255, 0, 0, 1)";
-                document.getElementById("es").innerText = "Copied!";
+    window.addEventListener('hashchange', updateHash);
 
-                setTimeout(()=>{
-                    document.getElementById("es").style.color = "rgba(255, 0, 0, 0.8)";
-                    document.getElementById("es").innerText = "Click to copy";
-                    ed = false;
-                }, wait2);
-            }
-        });
-        document.getElementById("b").addEventListener("click", async ()=>{
-            if (!bd) {
-                bd = true;
-                await navigator.clipboard.writeText(document.getElementById("b").innerText);
-                document.getElementById("bs").style.color = "rgba(0, 0, 255, 1)";
-                document.getElementById("bs").innerText = "Copied!";
-
-                setTimeout(()=>{
-                    document.getElementById("bs").style.color = "rgba(0, 0, 255, 0.8)";
-                    document.getElementById("bs").innerText = "Click to copy";
-                    bd = false;
-                }, wait2);
-            }
-        });
-    });
+    updateHash();
+    animationloop();
 </script>
-
-
