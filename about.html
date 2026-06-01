@@ -1,80 +1,118 @@
 <script src="animations.js"></script>
 <script defer>
     async function createPoint(text,paragraph,color,end=false){
+        var l=document.createElement("div");
+        l.className = "line i";
+        document.getElementById("cont").appendChild(l);
+        growFromTop(l,"0.5s");
+        
         var p=document.createElement("div");
-        p.className = "point " + ((color != "r") ? "b" : "r rp");
+        p.className = "point "+color;
         document.getElementById("cont").appendChild(p);
         await jumpOut(p,"0.5s");
 
         var t=document.createElement("div");
-        t.className = "text "  + ((color != "r") ? "b" : "r rt");
+        t.className = "text "+color;
         document.getElementById("cont").appendChild(t);
         await growFromLeft(t,"0.5s");
         await say(t,text);
 
         var d=document.createElement("div");
-        d.className = "paragraph " + ((color != "r") ? "b" : "r rpa");
+        d.className = "paragraph "+color;
         document.getElementById("cont").appendChild(d);
         await say(d,paragraph);
 
         if (!end){
             var l=document.createElement("div");
-            l.className = "line " + ((color != "r") ? "b" : "r rl");
+            l.className = "line "+color;
             document.getElementById("cont").appendChild(l);
             await growFromTop(l,"0.5s");
         }
+
+        var h=document.createElement("div");
+        h.className = "hidden";
+        document.getElementById("cont").appendChild(h);
     }
+
+    function isVisible(e){
+        if (!e) return false;
+        return (e.getBoundingClientRect().bottom <= (window.innerHeight || document.documentElement.clientHeight));
+    }
+
+    let points=[
+        {
+            text: "test",
+            paragraph: "yada yada yada",
+            color: "r"
+        },
+        {
+            text: "test2",
+            paragraph: "yada yada yada",
+            color: "b"
+        }
+    ];
+
+    function showNext(){
+        let hl=document.getElementsByClassName("hidden");
+        let np=points[hl.length];
+
+        if (np){
+            createPoint(np.text,np.paragraph,np.color,points[hl.length+1]==null);
+        }
+    }
+
+    document.addEventListener("scroll",async ()=>{
+        let hl=document.getElementsByClassName("hidden");
+        let ce=hl[hl.length-1];
+        if (isVisible(ce) && !ce.hasAttribute("seen")){
+            showNext();
+            ce.setAttribute("seen","true");
+        }
+    });
+
     document.addEventListener("DOMContentLoaded",async ()=>{    
-        await createPoint("test","nemo didnt give me anything to write smh","b");
-        await createPoint("test2","WORK IN PROGRESS PEOPLE (had to commit my changes sry)","r");
+        await jumpOut(document.getElementsByClassName("t")[0],"0.5s");
+        await fadeIn(document.getElementById("des"),"0.5s");
+        await jumpOut(document.getElementsByClassName("t")[1],"0.5s");
+        let fp=points[0];
+        await createPoint(fp.text,fp.paragraph,fp.color);
     });
 </script>
 <link rel="stylesheet" href="animations.css">
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Orbitron:wght@400..900&family=Sigmar&display=swap');
+
+    .b{
+        background: blue !important;
+        color: blue;
+        border-bottom-color: blue !important;
+    } 
+
+    .i{
+        background: transparent !important;
+        color: transparent !important;
+        position: absolute;
+    }
+
+    .r{
+        background: red !important;
+        color: red;
+        border-bottom-color: red !important;
+    }
+
     .point{
         width: 5vh;
         height: 5vh;
-        background: blue;
         border-radius: 50%;
         margin-left: 2.6vh;
         opacity: 0;
-    }
-
-    .b{
-        background: blue;
-        color: blue;
-    } 
-
-    .r{
-        background: red;
-        color: red;
-        margin-left: auto !important;
-    }
-
-    .rp{
-        margin-right: 2.6vh;
-    }
-
-    .rpa{
-        transform: translateX(-8vh) !important;
-        margin-left: auto;
-        text-align: right;
-    }
-
-    .rl{
-        margin-right: 4.8vh;
-    }
-
-    .rt{
-        padding-right: 2vh;
-        text-align: right;
     }
 
     .paragraph{
         mask-image: none;
         opacity: 1;
         width: 80vw;
-        color: blue;
         background: transparent !important;
         font-size: 3vh;
         height: 50vh;
@@ -84,7 +122,6 @@
 
     .line{
         width: 0.5vh;
-        background: blue;
         height: 50vw;
         margin-left: 4.8vh;
         opacity: 0;
@@ -94,14 +131,42 @@
         width: 80vw;
         background: transparent !important;
         height: 2.5vh;
-        border-bottom: 0.5vh solid blue;
         position: absolute;
+        border-bottom-width: 0.5vh !important;
         translate: 7vh -5.2vh;
-        color: blue;
         text-align: left;
+        border-bottom-style: solid;
         font-size: 2vh;
         padding-left: 2vh;
         opacity: 0;
     }
+    .t {
+        font-size: 4.5vh;
+        text-align: center;
+        margin: 1px;
+        opacity: 0;
+        color: blue;
+        padding-top: 10vh;
+    }
+    #des {
+        opacity: 0;
+        color: blue;
+        padding: 2vw;
+        font-size: 3vh;
+        background: rgba(0,0,255,0.3);
+        border-radius: 15px;
+    }
 </style>
+<div class="t">
+    Our Server
+</div>
+<div id="des">
+    NemoXn SMP delivers a refreshing, vanilla-style Minecraft experience that cuts through the clutter of pay-to-win mechanics and excessive
+     plugins. Offering a chill, semi-anarchy enviorment with crossplay support for Java, Bedrock, and Eaglercraft, it welcomes both premium and cracked
+     players alike. Backed by a relaxed staff team and a non-toxic community, it's the ultimate 24/7 destination for players seeking
+     pure, unflitered survival gameplay, exciting events, and complete competitive freedom.
+</div>
+<div class="t" style="color:red;">
+    Timeline
+</div>
 <div id="cont"></div>

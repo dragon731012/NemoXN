@@ -104,6 +104,8 @@ function startBounce(e){
     }
     bounce(800);
 }
+
+// these two functions are from one of my other projects, and have been modified by AI.
 async function show(e){
     return new Promise((r) => {
         let val = -5;
