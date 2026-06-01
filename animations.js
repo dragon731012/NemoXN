@@ -106,11 +106,10 @@ function startBounce(e){
 }
 
 // these two functions are from one of my other projects, and have been modified by AI.
-async function show(e){
+async function show(e,step){
     return new Promise((r) => {
         let val = -5;
         const d = 7;
-        const step = 1;
         const speed = 10;
 
         let interval = setInterval(() => {
@@ -138,7 +137,7 @@ async function show(e){
     });
 }
 
-async function say(el, text){
+async function say(el, text,step=1){
     el.style.transition = "0s all";
     el.style.opacity = "1";
 
@@ -183,7 +182,7 @@ async function say(el, text){
     });
 
     for (let line of lineDivs) {
-        await show(line);
+        await show(line,step);
     }
     return true;
 }

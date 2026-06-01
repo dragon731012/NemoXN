@@ -11,16 +11,23 @@
         document.getElementById("cont").appendChild(p);
         await jumpOut(p,"0.5s");
 
-        var t=document.createElement("div");
-        t.className = "text "+color;
-        document.getElementById("cont").appendChild(t);
-        await growFromLeft(t,"0.5s");
-        await say(t,text);
+        var tw = document.createElement("div");
+        tw.className = "text-wrap";
+        document.getElementById("cont").appendChild(tw);
+
+        var t = document.createElement("div");
+        t.className = "text " + color;
+        t.textContent = text;
+        t.style.color="transparent";
+        tw.appendChild(t);
+        await growFromLeft(t, "0.2s");
+        t.style.color="";
+        await say(t,text,3);
 
         var d=document.createElement("div");
         d.className = "paragraph "+color;
         document.getElementById("cont").appendChild(d);
-        await say(d,paragraph);
+        say(d,paragraph);
 
         if (!end){
             var l=document.createElement("div");
@@ -41,8 +48,8 @@
 
     let points=[
         {
-            text: "test",
-            paragraph: "Nemo and Demxn met on an Eaglercraft shared world",
+            text: "Nemo and Demxn met on an Eaglercraft shared world",
+            paragraph: "",
             color: "r"
         },
         {
@@ -97,23 +104,32 @@
         }
     ];
 
-    function showNext(){
+    let inprogress=false;
+
+    async function showNext(){
         let hl=document.getElementsByClassName("hidden");
         let np=points[hl.length];
 
         if (np){
-            createPoint(np.text,np.paragraph,np.color,points[hl.length+1]==null);
+            await createPoint(np.text,np.paragraph,np.color,points[hl.length+1]==null);
         }
     }
 
-    document.addEventListener("scroll",async ()=>{
+    async function check(){
+        if (inprogress) return;
         let hl=document.getElementsByClassName("hidden");
         let ce=hl[hl.length-1];
         if (isVisible(ce) && !ce.hasAttribute("seen")){
-            showNext();
+            inprogress = true;
+            await showNext();
             ce.setAttribute("seen","true");
+            inprogress=false;
+
+            check();
         }
-    });
+    }
+
+    document.addEventListener("scroll",check);
 
     document.addEventListener("DOMContentLoaded",async ()=>{    
         await jumpOut(document.getElementsByClassName("t")[0],"0.5s");
@@ -175,15 +191,21 @@
     .text{
         /*width: 80vw;*/
         background: transparent !important;
-        height: 2.5vh;
-        position: absolute;
+        height: 3.3vh;
+        /*position: absolute;*/
         border-bottom-width: 0.5vh !important;
-        translate: 7vh -5.2vh;
+        /*translate: 7vh -5.9vh;*/
         text-align: left;
         border-bottom-style: solid;
-        font-size: 2vh;
+        font-size: 2.5vh;
+        padding-right: 1vh;
         padding-left: 2vh;
         opacity: 0;
+    }
+    .text-wrap {
+        position: absolute;
+        translate: 7vh -5.9vh;
+        transform-origin: left;
     }
     .t {
         font-size: 4.5vh;
