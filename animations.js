@@ -106,7 +106,7 @@ function startBounce(e){
 }
 
 // these two functions are from one of my other projects, and have been modified by AI.
-async function show(e,step){
+async function show(e,step=1){
     return new Promise((r) => {
         let val = -5;
         const d = 7;

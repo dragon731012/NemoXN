@@ -88,6 +88,7 @@ button:hover {
     flex-direction: column;
     overflow: hidden;
     height: 20vh;
+    opacity: 0;
     justify-content: center;
     align-items: start;
 }

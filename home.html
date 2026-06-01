@@ -36,7 +36,7 @@
 <script src="animations.js"></script>
 <script>
     async function start(){
-        await setTimeout(async () => {
+        setTimeout(async () => {
             await show(document.getElementById("starter"));
             await setTimeout(async () => {
                 await jumpOut(document.getElementById("join"),"1s");
@@ -45,7 +45,7 @@
                 //startBounce(document.getElementById("disc"));   
                 await fadeIn(document.getElementById("reviewcont"),"1s");
             }, 300);
-    },900);
+        },900);
     }
     start();
 
