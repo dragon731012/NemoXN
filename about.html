@@ -1,32 +1,32 @@
 <script src="animations.js"></script>
 <script defer>
-    async function createPoint(text,paragraph,end=false){
+    async function createPoint(text,paragraph,color,end=false){
         var p=document.createElement("div");
-        p.className="point";
+        p.className = "point " + ((color != "r") ? "b" : "r rp");
         document.getElementById("cont").appendChild(p);
         await jumpOut(p,"0.5s");
 
         var t=document.createElement("div");
-        t.className="text";
+        t.className = "text "  + ((color != "r") ? "b" : "r rt");
         document.getElementById("cont").appendChild(t);
         await growFromLeft(t,"0.5s");
         await say(t,text);
 
         var d=document.createElement("div");
-        d.className="paragraph";
+        d.className = "paragraph " + ((color != "r") ? "b" : "r rpa");
         document.getElementById("cont").appendChild(d);
         await say(d,paragraph);
 
         if (!end){
             var l=document.createElement("div");
-            l.className="line";
+            l.className = "line " + ((color != "r") ? "b" : "r rl");
             document.getElementById("cont").appendChild(l);
             await growFromTop(l,"0.5s");
         }
     }
     document.addEventListener("DOMContentLoaded",async ()=>{    
-        await createPoint("test","nemo didnt give me anything to write smh");
-        await createPoint("test2","nemo didnt give me anything to write :/");
+        await createPoint("test","nemo didnt give me anything to write smh","b");
+        await createPoint("test2","WORK IN PROGRESS PEOPLE (had to commit my changes sry)","r");
     });
 </script>
 <link rel="stylesheet" href="animations.css">
@@ -40,11 +40,42 @@
         opacity: 0;
     }
 
+    .b{
+        background: blue;
+        color: blue;
+    } 
+
+    .r{
+        background: red;
+        color: red;
+        margin-left: auto !important;
+    }
+
+    .rp{
+        margin-right: 2.6vh;
+    }
+
+    .rpa{
+        transform: translateX(-8vh) !important;
+        margin-left: auto;
+        text-align: right;
+    }
+
+    .rl{
+        margin-right: 4.8vh;
+    }
+
+    .rt{
+        padding-right: 2vh;
+        text-align: right;
+    }
+
     .paragraph{
         mask-image: none;
         opacity: 1;
         width: 80vw;
         color: blue;
+        background: transparent !important;
         font-size: 3vh;
         height: 50vh;
         position: absolute;
@@ -61,6 +92,7 @@
 
     .text{
         width: 80vw;
+        background: transparent !important;
         height: 2.5vh;
         border-bottom: 0.5vh solid blue;
         position: absolute;
