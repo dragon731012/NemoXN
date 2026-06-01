@@ -11,6 +11,9 @@
         <button id="disc" data-url="https://discord.gg/zkcxyhah6y" onclick="window.top.location.href=this.dataset.url">Discord</button>
     </div>
 
+    <div id="reviewcont">
+    </div>
+
     <div id="credits">
         <h1 id="creditst">Credits</h1>
         <p id="ct">
@@ -64,6 +67,36 @@
             },wait);
         }
     },speed);
+
+    function addReview(user,text,color,stars=5){
+        let r=document.createElement("div");
+        r.className="rcont";
+        if (color=="blue") r.style="background-image: linear-gradient(to right bottom, rgba(0, 0, 255, 0.6), rgba(0, 0, 255, 0.4));";
+        if (color=="red") r.style="background-image: linear-gradient(to right bottom, rgba(255, 0, 0, 0.6), rgba(255, 0, 0, 0.4));";
+        document.getElementById("reviewcont").appendChild(r);
+
+        let sc=document.createElement("div");
+        sc.className="starcont";
+        r.appendChild(sc);
+
+        for (let i=0;i<stars;i++){
+            let s=document.createElement("img");
+            s.src="star.png";
+            s.className="star";
+            sc.appendChild(s);
+        }
+
+        let t=document.createElement("div");
+        t.innerHTML=text;
+        t.className="rtext";
+        r.appendChild(t);
+
+        let u=document.createElement("div");
+        u.innerHTML=" - "+user;
+        u.className="ruser";
+        r.appendChild(u);
+    }
+    addReview("Potato.","Aamazing server, great community, fun seasons. Best all-around choice.","blue");
 </script>
 
 
