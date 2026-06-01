@@ -24,8 +24,9 @@
             await growFromTop(l,"0.5s");
         }
     }
-    document.addEventListener("DOMContentLoaded",()=>{    
-        createPoint("test","nemo didnt give me anything to write smh");
+    document.addEventListener("DOMContentLoaded",async ()=>{    
+        await createPoint("test","nemo didnt give me anything to write smh");
+        await createPoint("test2","nemo didnt give me anything to write :/");
     });
 </script>
 <link rel="stylesheet" href="animations.css">
