@@ -15,13 +15,17 @@ html {
     overflow-x:hidden;
 }
 
+#community {
+    margin-top: 4vh;
+}
+
 .aligner {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
     width: 100vw;
-    height: 70vh;
+    height: 56vh;
     font-size: min(15vh,17vw);
     font-family: "Alfa Slab One", serif;
     font-weight: 100;
@@ -219,7 +223,16 @@ html {
 }
 
 #join {
+    background: blue;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    transform: scale(0%);
+}
+
+#disc {
     background: red;
+    margin-left: 1vw;
+    margin-right: 1vw;
     transform: scale(0%);
 }
 
