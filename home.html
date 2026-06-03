@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="animations.css">
+<link rel="stylesheet" href="scroller.css">
 
 <div id="cont">
     <div class = "aligner">
@@ -34,6 +35,7 @@
     }
 </style>
 <script src="animations.js"></script>
+<script src="scroller.js"></script>
 <script>
     async function start(){
         setTimeout(async () => {
@@ -69,11 +71,14 @@
         }
     },speed);
 
-    function addReview(user,text,color,stars=5){
+    function colorReview(r,color){
+            if (color=="b") r.style="background-image: linear-gradient(to right bottom, rgba(0, 0, 255, 0.6), rgba(0, 0, 255, 0.4));";
+            if (color=="r") r.style="background-image: linear-gradient(to right bottom, rgba(255, 0, 0, 0.6), rgba(255, 0, 0, 0.4));";
+    }
+
+    function addReview(user,text,stars=5){
         let r=document.createElement("div");
         r.className="rcont";
-        if (color=="blue") r.style="background-image: linear-gradient(to right bottom, rgba(0, 0, 255, 0.6), rgba(0, 0, 255, 0.4));";
-        if (color=="red") r.style="background-image: linear-gradient(to right bottom, rgba(255, 0, 0, 0.6), rgba(255, 0, 0, 0.4));";
         document.getElementById("reviewcont").appendChild(r);
 
         let sc=document.createElement("div");
@@ -97,7 +102,65 @@
         u.className="ruser";
         r.appendChild(u);
     }
-    addReview("Potato.","Aamazing server, great community, fun seasons. Best all-around choice.","blue");
+
+    function shuffleAndColor(){
+        let reviews=Array.from(document.getElementsByClassName("rcont"));
+        reviews.sort(() => Math.random() - 0.5);
+
+        let c="b";
+        let l=document.getElementsByClassName("rcont");
+        for (let i=0;i<l.length;i++){
+            colorReview(l[i],c);
+            if (c=="b"){
+                c="r";
+            } else {
+                c="b";
+            }
+        }
+    }
+
+    addReview("ItzMilo","I think this server is perfect, it's so easy to get gear and plugins aren't too crazy. The best part is that it's original and not just like DonutSMP.");
+
+    addReview("Zakfuh","This server is so good");
+
+    addReview("Jesse033","It's super cool and really fun to play on");
+
+    addReview("Arcane","This server is fire, you should play");
+
+    addReview("Soulzzz","This SMP is really fun to play on, and I genuinely like it. The gameplay feels smooth, the players are active and non-toxic, and theres always something to do. ");
+
+    addReview("Foggsxe","This server was one of my favorites. Every time I got on I had high expectations. This server has had some ups and downs but overall has a great community");
+
+    addReview("Sigmafady","Goated server, many thanks to nemo and the staff team for their work on the server");
+
+    addReview("Sigmafady","Goated server, many thanks to nemo and the staff team for their work on the server");
+
+    addReview("Potato.","Aamazing server, great community, fun seasons. Best all-around choice.");
+
+    shuffleAndColor();
+
+    let hovering = false;
+
+    const carousel = new InfiniteScrollCarousel(document.getElementById("reviewcont"), {
+        speed: 50,
+        pauseOnHover: false,
+        onMomentumEnd: () => {
+            if (hovering) {
+                setTimeout(()=>{
+                    carousel.pause();
+                },50);
+            }
+        }
+    });
+
+    document.getElementById("reviewcont").addEventListener('mouseenter', () => {
+        hovering = true;
+    });
+
+    document.getElementById("reviewcont").addEventListener('mouseleave', () => {
+        carousel.resume();
+        hovering = false;
+    });
 </script>
 
 
