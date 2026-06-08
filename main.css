@@ -277,6 +277,22 @@ html {
     color: blue;
 }
 
+#status,#status2,#status3{
+    position: absolute;
+    top: 10vh;
+    left: 1vw;
+    color: white;
+    font-family: "Orbitron", sans-serif;
+}
+
+#status2 {
+  top: 12.5vh;
+}
+
+#status3 {
+  top: 15vh;
+}
+
 .starcont{
     height: 15%;
     overflow: hidden;

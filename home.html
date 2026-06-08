@@ -2,6 +2,10 @@
 <link rel="stylesheet" href="animations.css">
 <link rel="stylesheet" href="scroller.css">
 
+<div id="status">Java - </div>
+<div id="status2">Bedrock - </div>
+<div id="status3">Eagler - </div>
+
 <div id="cont">
     <div class = "aligner">
         <div id="main">Nemo<b id="n">XN</b></div>
@@ -161,6 +165,82 @@
         carousel.resume();
         hovering = false;
     });
+
+    async function canReachServer(url,type="java") {
+        return await new Promise((resolve) => {
+            let serverIp = "mc.nemoxn.top";
+            fetch("https://api.mcstatus.io/v2/status/"+type+"/" + serverIp)
+            .then(response => {
+                if (!response.ok) {
+                    resolve(false);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.online) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    }
+
+    // this method was altered by AI for websockets
+    function canReachEagler(url,timeout=1000){
+        return new Promise((resolve) => {
+            const ws = new WebSocket(url);
+            
+            const timer = setTimeout(() => {
+                ws.close();
+                resolve(false);
+            }, timeout);
+
+            ws.onopen = () => {
+                clearTimeout(timer);
+                ws.close();
+                resolve(true);
+            };
+
+            ws.onerror = () => {
+                clearTimeout(timer);
+                ws.close();
+                resolve(false);
+            };
+        });
+    }
+
+    async function statuses(){
+        if (await canReachServer("mc.nemoxn.top")) {
+            document.getElementById("status").innerHTML+="Online";
+            document.getElementById("status").style.color="lightgreen";
+
+            if (await canReachServer("mc.nemoxn.top:25573","bedrock")){
+                document.getElementById("status2").innerHTML+="Online";
+                document.getElementById("status2").style.color="lightgreen";
+            } else {
+                document.getElementById("status2").innerHTML+="Offline";
+                document.getElementById("status2").style.color="red";
+            }
+
+            if (await canReachEagler("https://eg.nemoxn.top")){
+                document.getElementById("status3").innerHTML+="Online";
+                document.getElementById("status3").style.color="lightgreen";
+            } else {
+                document.getElementById("status3").innerHTML+="Offline";
+                document.getElementById("status3").style.color="red";
+            }
+        } else {
+            document.getElementById("status").innerHTML+="Offline";
+            document.getElementById("status").style.color="red";
+
+            document.getElementById("status2").innerHTML+="Offline";
+            document.getElementById("status2").style.color="red";
+
+            document.getElementById("status3").innerHTML+="Offline";
+            document.getElementById("status3").style.color="red";
+        }
+    }
+    statuses();
 </script>
-
-
